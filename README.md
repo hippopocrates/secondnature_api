@@ -16,18 +16,21 @@ INSERT INTO habits (habit_item, completed, icon) VALUES (‘Practice Coding’, 
 INSERT INTO habits (habit_item, completed, icon) VALUES (‘Meditate’, false, ‘/img/meditate.png’);
 ```
 * Gem Deployment: 
-```
+``` - 
 bundle install
 ```
 
-Routes Utilized:
+* Routes Utilized:
 ```ruby
 get '/habits', to: 'habits#index'
-  get '/habits/:id', to: 'habits#show'
-  post '/habits', to: 'habits#create'
-  delete '/habits/:id', to: 'habits#delete'
-  put '/habits/:id', to: 'habits#update'
+get '/habits/:id', to: 'habits#show'
+post '/habits', to: 'habits#create'
+delete '/habits/:id', to: 'habits#delete'
+put '/habits/:id', to: 'habits#update'
 ```
+* Prepared Statements
+
+We used prepared statements in order to separate the SQL code from the routes themselves in habit.rb - The database MUST be called 'habits' in order to run the backend API properly. Any other tables you create must be added to the prepared statements section.
 
 #### Database initialization
 
