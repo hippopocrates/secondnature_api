@@ -1,8 +1,8 @@
 class Habit
 
 # connect to postgres
-  if(ENV['https://secondnature-api-1.herokuapp.com/'])
-      uri = URI.parse(ENV['https://secondnature-api-1.herokuapp.com/'])
+  if(ENV['DATABASE_URL'])
+      uri = URI.parse(ENV['DATABASE_URL'])
       DB = PG.connect(uri.hostname, uri.port, nil, nil, uri.path[1..-1], uri.user, uri.password)
   else
       DB = PG.connect({:host => "localhost", :port => 5432, :dbname => 'habit_tracker_api_development'})
