@@ -24,7 +24,7 @@ Run ```postgres -D /usr/local/var/postgres```
 
 * Deployment instructions
 
-* Issues with Heroku:
+*** Issues with Heroku:
 
 The biggest pain point we had with this project was the deployment of the API on Heroku. First, our initial repositories were not .git initialized for some reason so we had to recreate the repositories. Caroline was having issues with .zsh in her terminal, so she had to change the Ruby Version to 2.3.7 in order to get Heroku to recognize the folder. Richard was able clone the repository and changed the Ruby Version back to 2.6.1.
 
