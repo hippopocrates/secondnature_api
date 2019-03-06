@@ -1,5 +1,7 @@
 {
   "name": "habit_tracker_api",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "local-storage": "^1.4.2"
+  }
 }
