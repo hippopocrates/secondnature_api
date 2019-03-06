@@ -2,7 +2,7 @@
 
 This is the database backend server structure for our app called Secondnature, a habit tracking app. This API was built with Ruby on Rails with Postgresql as the database system.
 
-##### API Technical Details:
+#### API Technical Details:
 
 * Ruby version: 2.6.1
 
@@ -15,14 +15,25 @@ CREATE TABLE habits (id SERIAL, habit_item VARCHAR(255), completed BOOLEAN, icon
 INSERT INTO habits (habit_item, completed, icon) VALUES (‘Practice Coding’, false, ‘/img/star.png’);
 INSERT INTO habits (habit_item, completed, icon) VALUES (‘Meditate’, false, ‘/img/meditate.png’);
 ```
+* Gem Deployment: 
+```
+bundle install
+```
 
-* Database initialization
+Routes Utilized:
+```ruby
+get '/habits', to: 'habits#index'
+  get '/habits/:id', to: 'habits#show'
+  post '/habits', to: 'habits#create'
+  delete '/habits/:id', to: 'habits#delete'
+  put '/habits/:id', to: 'habits#update'
+```
+
+#### Database initialization
 
 Run ```postgres -D /usr/local/var/postgres```
 
-
-
-##### Deployment instructions
+#### Deployment instructions
 
 If you haven't already, log in:
 
@@ -42,7 +53,7 @@ Heroku is already set up to use Postgres, so you don't need any addons. To acces
 
 Now you can copy the create/insert commands that you used for your local setup.
 
-##### Issues with Heroku:
+#### Issues with Heroku:
 
 The biggest pain point we had with this project was the deployment of the API on Heroku. First, our initial repositories were not .git initialized for some reason so we had to recreate the repositories. Caroline was having issues with .zsh in her terminal, so she had to change the Ruby Version to 2.3.7 in order to get Heroku to recognize the folder. Richard was able clone the repository and changed the Ruby Version back to 2.6.1 and get the ```rails s``` command to work in terminal.
 
