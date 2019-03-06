@@ -9,7 +9,7 @@ class HabitsController < ApplicationController
   def show
     render json: Habit.find(params["id"])
   end
-  
+
   #create route
   def create
     render json: Habit.create(params["habit"])

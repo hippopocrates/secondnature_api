@@ -8,6 +8,7 @@ def initialize(opts = {}, id = nil)
   @id = id.to_i
   @task_item = opts["habit_item"]
   @completed = opts["completed"]
+  @icon = opts["icon"]
 end
 
   # ==================================================
@@ -25,9 +26,9 @@ end
   # create task
   DB.prepare("create_habit",
     <<-SQL
-      INSERT INTO habits (habit_item, completed)
-      VALUES ( $1, $2 )
-      RETURNING id, habit_item, completed;
+      INSERT INTO habits (habit_item, completed, icon)
+      VALUES ( $1, $2, $3 )
+      RETURNING id, habit_item, completed, icon;
     SQL
   )
 
@@ -44,9 +45,9 @@ end
   DB.prepare("update_habit",
     <<-SQL
       UPDATE habits
-      SET habit_item = $2, completed = $3
+      SET habit_item = $2, completed = $3, icon = $4
       WHERE id = $1
-      RETURNING id, habit_item, completed;
+      RETURNING id, habit_item, completed, icon;
     SQL
   )
 
@@ -60,7 +61,8 @@ end
       {
         "id" => result["id"].to_i,
         "habit_item" => result["habit_item"],
-        "completed" => result["completed"] === 'f' ? false : true
+        "completed" => result["completed"] === 'f' ? false : true,
+        "icon" => result["icon"]
       }
     end #results.map end
   end #self.all-end
@@ -71,19 +73,21 @@ end
     return {
       "id" => result["id"].to_i,
       "habit_item" => result["habit_item"],
-      "completed" => result["completed"] === 'f' ? false : true
+      "completed" => result["completed"] === 'f' ? false : true,
+      "icon" => result["icon"]
     }
   end #self.find-end
 
   #create a habit
   def self.create opts
     opts["completed"] === 'f' ? false : ''
-    results = DB.exec_prepared("create_habit", [opts["habit_item"], opts["completed"]])
+    results = DB.exec_prepared("create_habit", [opts["habit_item"], opts["completed"], opts["icon"]])
     result = results.first
     return {
       "id" => result["id"].to_i,
       "habit_item" => result["habit_item"],
-      "completed" => result["completed"] === 'f' ? false : true
+      "completed" => result["completed"] === 'f' ? false : true,
+      "icon" => result["icon"]
     }
   end #self.create-end
 
@@ -97,12 +101,13 @@ end
 
   #update a habit
   def self.update id, opts
-    results = DB.exec_prepared("update_habit", [id, opts["habit_item"], opts["completed"]])
+    results = DB.exec_prepared("update_habit", [id, opts["habit_item"], opts["completed"], opts["icon"]])
     result = results.first
     return {
       "id" => result["id"].to_i,
       "habit_item" => result["habit_item"],
-      "completed" => result["completed"] === 'f' ? false : true
+      "completed" => result["completed"] === 'f' ? false : true,
+      "icon" => result["icon"]
     }
   end #self.delete-end
 
