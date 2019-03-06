@@ -1,15 +1,12 @@
-# README
+# Secondnature API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the database backend server structure for our app called Secondnature, a habit tracking app. This API was built with Ruby on Rails with Postgresql as the database system.
 
-Things you may want to cover:
+API Details:
 
 * Ruby version: 2.6.1
 
-* System dependencies
-
-* Configuration
+* Deployment site: Heroku
 
 * Database creation (push into Postgreql):
 
